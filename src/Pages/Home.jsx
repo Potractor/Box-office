@@ -1,20 +1,12 @@
 import { searchForPeople, searchForShows } from "../api/Tvmaze";
 import { useState } from "react";
+import SearchForm from "../components/SearchForm";
 
 const Home = () => {
-  const [searchOption, setsearchOption] = useState("shows");
-  const [searchInput, setSearchInput] = useState("");
   const [api, setApi] = useState(null);
   const [apiDataError, setApiDataError] = useState(null);
-  function radiochange(event) {
-    setsearchOption(event.target.value);
-  }
-  console.log(searchOption);
-  function searchChangeHandler(event) {
-    setSearchInput(event.target.value);
-  }
-  async function submitHandler(event) {
-    event.preventDefault();
+
+  async function submitHandler(searchInput, searchOption) {
     try {
       setApiDataError(null);
       if (searchOption === "shows") {
@@ -41,31 +33,8 @@ const Home = () => {
   };
   return (
     <div>
-      <form action="submit" onSubmit={submitHandler}>
-        <input type="text" onChange={searchChangeHandler} />
-        <label>
-          Shows
-          <input
-            checked={searchOption === "shows"}
-            type="radio"
-            name="search-option"
-            value="shows"
-            onClick={radiochange}
-          />
-        </label>
-        <label>
-          Actors
-          <input
-            checked={searchOption === "actors"}
-            type="radio"
-            name="search-option"
-            value="actors"
-            onClick={radiochange}
-          />
-        </label>
+      <SearchForm submitHandler={submitHandler} />
 
-        <button type="submit">search</button>
-      </form>
       <div>{renderApiData()}</div>
     </div>
   );
