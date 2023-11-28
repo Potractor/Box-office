@@ -6,30 +6,32 @@ import Showsgrid from "../components/shows/Showsgrid";
 import ActorsGrid from "../components/actors/ActorsGrid";
 
 const Home = () => {
-  const [filter, setFilter] = useState(null);
-  const { data: api, error: apiDataError } = useQuery({
-    queryKey: ["search", filter],
-    queryFn: () =>
-      filter.searchOption === "shows"
-        ? searchForShows(filter.searchInput)
-        : searchForPeople(filter.Input),
-    enabled: !!filter,
-  });
+  // const [filter, setFilter] = useState(null);
+
+  // console.log(filter);
+  // const { data, error: apiDataError } = useQuery({
+  //   queryKey: ["search", filter],
+  //   queryFn: () => searchForPeople(filter.searchInput),
+  // });
+
+  const [api, setApi] = useState(null);
+  const [apiDataError, setApiDataError] = useState(null);
 
   async function submitHandler(searchInput, searchOption) {
-    setFilter(searchInput, searchOption);
-    // try {
-    //   setApiDataError(null);
-    //   if (searchOption === "shows") {
-    //     const result = await searchForShows(searchInput);
-    //     setApi(result);
-    //   } else {
-    //     const result = await searchForPeople(searchInput);
-    //     setApi(result);
-    //   }
-    // } catch (error) {
-    //   setApiDataError(error);
-    // }
+    // setFilter(searchInput, searchOption);
+    // setapi(data);
+    try {
+      setApiDataError(null);
+      if (searchOption === "shows") {
+        const result = await searchForShows(searchInput);
+        setApi(result);
+      } else {
+        const result = await searchForPeople(searchInput);
+        setApi(result);
+      }
+    } catch (error) {
+      setApiDataError(error);
+    }
   }
 
   const renderApiData = () => {
