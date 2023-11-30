@@ -1,5 +1,6 @@
 import { useStarredShows } from "../lib/useStarredShows";
 import { getShowByIds } from "../api/Tvmaze";
+import { TextCenter } from "../components/common/TextCenter";
 import { useQuery } from "@tanstack/react-query";
 import Showsgrid from "../components/shows/Showsgrid";
 import { useState, useEffect } from "react";
@@ -32,7 +33,7 @@ const Starred = () => {
   //   refetchOnWindowFocus: false,
   // });
   if (starredShows?.length === 0) {
-    return <div>No shows were starred</div>;
+    return <TextCenter>No shows were starred</TextCenter>;
   }
   if (starredShows?.length > 0) {
     return <Showsgrid shows={starredShows} />;
