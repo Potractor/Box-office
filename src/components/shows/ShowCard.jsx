@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const ShowCard = ({ name, image, id, summary, onStarMeClick }) => {
+const ShowCard = ({ name, image, id, summary, onStarMeClick, starred }) => {
   const transformedstring = summary
     ? summary.split(" ").slice(0, 10).join(" ").replace(/<.+?>/g, "")
     : "not-found";
@@ -17,7 +17,7 @@ const ShowCard = ({ name, image, id, summary, onStarMeClick }) => {
           Read more
         </a>
         <button onClick={() => onStarMeClick(id)} type="button">
-          Star me
+          {starred ? "unstar me" : "star me"}
         </button>
       </div>
     </div>
