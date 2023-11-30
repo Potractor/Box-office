@@ -1,8 +1,9 @@
 import { useState } from "react";
+import { useSearchStr } from "../lib/useSearchStr";
 
 const SearchForm = ({ submitHandler }) => {
   const [searchOption, setsearchOption] = useState("shows");
-  const [searchInput, setSearchInput] = useState("");
+  const [searchInput, setSearchInput] = useSearchStr();
   function radiochange(event) {
     setsearchOption(event.target.value);
   }
